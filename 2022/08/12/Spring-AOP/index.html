@@ -1,0 +1,184 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>Spring AOP | 美食家</title><meta name="keywords" content="Spring,AOP"><meta name="author" content="keinenamen"><meta name="copyright" content="keinenamen"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Spring AOP特性：可以不通过修改源代码方式，来添加新的功能； 底层采用动态代理实现 两种情况下的动态代理有接口创建接口实现类代理对象，增强类的方法 使用JDK动态代理，流程如下： 123456789101112131415161718192021222324252627282930313233343536373839404142public interface testDao&amp;#123;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring AOP">
+<meta property="og:url" content="http://example.com/2022/08/12/Spring-AOP/index.html">
+<meta property="og:site_name" content="美食家">
+<meta property="og:description" content="Spring AOP特性：可以不通过修改源代码方式，来添加新的功能； 底层采用动态代理实现 两种情况下的动态代理有接口创建接口实现类代理对象，增强类的方法 使用JDK动态代理，流程如下： 123456789101112131415161718192021222324252627282930313233343536373839404142public interface testDao&amp;#123;">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
+<meta property="article:published_time" content="2022-08-12T13:35:05.000Z">
+<meta property="article:modified_time" content="2022-08-12T13:38:12.739Z">
+<meta property="article:author" content="keinenamen">
+<meta property="article:tag" content="Spring">
+<meta property="article:tag" content="AOP">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2022/08/12/Spring-AOP/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Spring AOP',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-08-12 21:38:12'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.2.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">11</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">9</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div><hr/></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">美食家</a></span><div id="menus"><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Spring AOP</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-08-12T13:35:05.000Z" title="发表于 2022-08-12 21:35:05">2022-08-12</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-08-12T13:38:12.739Z" title="更新于 2022-08-12 21:38:12">2022-08-12</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Java%E6%A1%86%E6%9E%B6/">Java框架</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Java%E6%A1%86%E6%9E%B6/Spring/">Spring</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Spring AOP"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="Spring-AOP"><a href="#Spring-AOP" class="headerlink" title="Spring AOP"></a>Spring AOP</h2><h3 id="特性："><a href="#特性：" class="headerlink" title="特性："></a>特性：</h3><p>可以不通过修改源代码方式，来添加新的功能；</p>
+<p>底层采用动态代理实现</p>
+<h3 id="两种情况下的动态代理"><a href="#两种情况下的动态代理" class="headerlink" title="两种情况下的动态代理"></a>两种情况下的动态代理</h3><h4 id="有接口"><a href="#有接口" class="headerlink" title="有接口"></a>有接口</h4><p>创建接口实现类代理对象，增强类的方法</p>
+<p>使用JDK动态代理，流程如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">testDao</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">add</span><span class="params">(<span class="type">int</span> a,<span class="type">int</span> b)</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">testDaoImpl</span> <span class="keyword">implements</span> <span class="title class_">testDao</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">add</span><span class="params">(<span class="type">int</span> a,<span class="type">int</span> b)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> a+b;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 新建代理对象类</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">JDKProxy</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String [] args)</span>&#123;</span><br><span class="line">        Class [] interfaces = &#123;testDao.class&#125;;       </span><br><span class="line">        <span class="type">testDaoImpl</span>  <span class="variable">testDao</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">testDaoImpl</span>(); </span><br><span class="line">        <span class="comment">// 创建代理对象</span></span><br><span class="line">        <span class="type">testDao</span> <span class="variable">dao</span> <span class="operator">=</span> Proxy.newProxyInstance(JDKProxy.class.getClassLoader(),interfaces,<span class="keyword">new</span> <span class="title class_">testDaoProxy</span>(testDao));</span><br><span class="line">        <span class="type">int</span> <span class="variable">result</span> <span class="operator">=</span> dao.add(<span class="number">1</span>,<span class="number">2</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;result:&quot;</span>+result);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">testDaoProxy</span> <span class="keyword">implements</span> <span class="title class_">InvocationHandler</span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> Object obj;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">testDaoProxy</span><span class="params">(Object obj)</span>&#123;</span><br><span class="line">        <span class="built_in">this</span>.obj = obj;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 添加增强逻辑</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> Object <span class="title function_">invoke</span><span class="params">(Object proxy,Method method,Object []args)</span> thows Throwable&#123;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//方法之前</span></span><br><span class="line">        System.out.println(<span class="string">&quot;before:&quot;</span>+method.getName()+<span class="string">&quot;传递参数:&quot;</span>+Arrays.toString(args));</span><br><span class="line">        </span><br><span class="line">        <span class="type">Object</span> <span class="variable">res</span> <span class="operator">=</span> method.invoke(obj,args);</span><br><span class="line">        <span class="comment">// 方法之后</span></span><br><span class="line">        System.out.println(<span class="string">&quot;after:&quot;</span>+obj)</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="没有接口"><a href="#没有接口" class="headerlink" title="没有接口"></a>没有接口</h4><p>使用cglib动态代理</p>
+<p>创建子类的代理对象，增强类的方法</p>
+<h3 id="AOP术语"><a href="#AOP术语" class="headerlink" title="AOP术语"></a>AOP术语</h3><h4 id="连接点"><a href="#连接点" class="headerlink" title="连接点"></a>连接点</h4><p>类里面的哪些方法可以被增强，这些方法称为连接点。</p>
+<h4 id="切入点"><a href="#切入点" class="headerlink" title="切入点"></a>切入点</h4><p>实际被真正增强的方法，称为切入点</p>
+<h4 id="通知（增强）"><a href="#通知（增强）" class="headerlink" title="通知（增强）"></a>通知（增强）</h4><p>实际增强的逻辑部分称为通知（增强），例如 日志，权限判断。</p>
+<p>通知有多种类型：</p>
+<h5 id="前置通知"><a href="#前置通知" class="headerlink" title="前置通知"></a>前置通知</h5><p>在切入点之前被执行</p>
+<h5 id="后置通知"><a href="#后置通知" class="headerlink" title="后置通知"></a>后置通知</h5><p>在切入点之后被执行</p>
+<h5 id="环绕通知"><a href="#环绕通知" class="headerlink" title="环绕通知"></a>环绕通知</h5><p>在切入点前后都被执行</p>
+<h5 id="异常通知"><a href="#异常通知" class="headerlink" title="异常通知"></a>异常通知</h5><p>在切入点发生异常后执行</p>
+<h5 id="最终通知"><a href="#最终通知" class="headerlink" title="最终通知"></a>最终通知</h5><p>类似finally，当发生异常时，最终通知一定会执行；而后置通知不会再执行。</p>
+<h4 id="切面"><a href="#切面" class="headerlink" title="切面"></a>切面</h4><p>是动作；把通知应用到切入点过程</p>
+<h3 id="AspectJ实现AOP"><a href="#AspectJ实现AOP" class="headerlink" title="AspectJ实现AOP"></a>AspectJ实现AOP</h3><p>AspectJ是一个独立的AOP框架，通常有基于xml和基于注解两种方式实现AOP操作。</p>
+<h4 id="切入点表达式"><a href="#切入点表达式" class="headerlink" title="切入点表达式"></a>切入点表达式</h4><p>作用： 了解对哪个类里面的哪个方法进行增强</p>
+<p>语法结构 ：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">execution([权限修饰符][返回类型][类全路径][方法名称]([参数列表]))</span><br></pre></td></tr></table></figure>
+
+<p>例如:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//对 com.testpac.testDao 类里面的add方法做增强</span></span><br><span class="line">execution(* com.testpac.testDao.add(..))</span><br><span class="line"><span class="comment">//对 com.testpac.testDao 类里面的所有方法做增强</span></span><br><span class="line">execution(* com.testpac.testDao.*(..))</span><br><span class="line"><span class="comment">//对 com.testpac包里的所有类，类里面的所有方法做增强</span></span><br><span class="line">execution(* com.testpac.*.*(..))</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h3><h4 id="SpringAOP、AspectJ、CGlib概念对比"><a href="#SpringAOP、AspectJ、CGlib概念对比" class="headerlink" title="SpringAOP、AspectJ、CGlib概念对比"></a>SpringAOP、AspectJ、CGlib概念对比</h4><ul>
+<li>SpringAOP是纯基于Java的反射机制来实现的，速度较慢但是通用且强大，只能基于接口实现aop代理增强，运行时动态执行；</li>
+<li>AspectJ是基于AOP这一哲学设计理念的实践，是基于Java的扩展，在编译时对目标类（非接口实现类也可）进行aop代理增强，运行时直接调用字节码；</li>
+<li>CGlib全称Code Generation Library，即代码生成包，底层是ASM—一个短小精悍的字节码操作框架，运行时对无接口实现的非final类进行字节码aop代理增强；</li>
+</ul>
+<p><strong>相比较而言，反射效率是比较低的，而字节码更高效，执行速度比较：</strong> AspectJ &gt; CGlib &gt; SpringAOP</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://example.com">keinenamen</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2022/08/12/Spring-AOP/">http://example.com/2022/08/12/Spring-AOP/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">美食家</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Spring/">Spring</a><a class="post-meta__tags" href="/tags/AOP/">AOP</a></div><div class="post_share"><div class="social-share" data-image="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2022/08/12/Spring%E7%AE%A1%E7%90%86Bean-%E5%9F%BA%E4%BA%8E%E6%B3%A8%E8%A7%A3%E6%96%B9%E5%BC%8F/"><img class="next-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Spring管理Bean-基于注解方式</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2022/08/09/Spring%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98/" title="Spring常见面试题"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-08-09</div><div class="title">Spring常见面试题</div></div></a></div><div><a href="/2022/08/12/Spring%E7%AE%A1%E7%90%86Bean-%E5%9F%BA%E4%BA%8E%E6%B3%A8%E8%A7%A3%E6%96%B9%E5%BC%8F/" title="Spring管理Bean-基于注解方式"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-08-12</div><div class="title">Spring管理Bean-基于注解方式</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">keinenamen</div><div class="author-info__description">个人站点</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">11</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">9</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Spring-AOP"><span class="toc-number">1.</span> <span class="toc-text">Spring AOP</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%89%B9%E6%80%A7%EF%BC%9A"><span class="toc-number">1.1.</span> <span class="toc-text">特性：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%A4%E7%A7%8D%E6%83%85%E5%86%B5%E4%B8%8B%E7%9A%84%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86"><span class="toc-number">1.2.</span> <span class="toc-text">两种情况下的动态代理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9C%89%E6%8E%A5%E5%8F%A3"><span class="toc-number">1.2.1.</span> <span class="toc-text">有接口</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B2%A1%E6%9C%89%E6%8E%A5%E5%8F%A3"><span class="toc-number">1.2.2.</span> <span class="toc-text">没有接口</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#AOP%E6%9C%AF%E8%AF%AD"><span class="toc-number">1.3.</span> <span class="toc-text">AOP术语</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%9E%E6%8E%A5%E7%82%B9"><span class="toc-number">1.3.1.</span> <span class="toc-text">连接点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%87%E5%85%A5%E7%82%B9"><span class="toc-number">1.3.2.</span> <span class="toc-text">切入点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%80%9A%E7%9F%A5%EF%BC%88%E5%A2%9E%E5%BC%BA%EF%BC%89"><span class="toc-number">1.3.3.</span> <span class="toc-text">通知（增强）</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%89%8D%E7%BD%AE%E9%80%9A%E7%9F%A5"><span class="toc-number">1.3.3.1.</span> <span class="toc-text">前置通知</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%90%8E%E7%BD%AE%E9%80%9A%E7%9F%A5"><span class="toc-number">1.3.3.2.</span> <span class="toc-text">后置通知</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%8E%AF%E7%BB%95%E9%80%9A%E7%9F%A5"><span class="toc-number">1.3.3.3.</span> <span class="toc-text">环绕通知</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%BC%82%E5%B8%B8%E9%80%9A%E7%9F%A5"><span class="toc-number">1.3.3.4.</span> <span class="toc-text">异常通知</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%9C%80%E7%BB%88%E9%80%9A%E7%9F%A5"><span class="toc-number">1.3.3.5.</span> <span class="toc-text">最终通知</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%87%E9%9D%A2"><span class="toc-number">1.3.4.</span> <span class="toc-text">切面</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#AspectJ%E5%AE%9E%E7%8E%B0AOP"><span class="toc-number">1.4.</span> <span class="toc-text">AspectJ实现AOP</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%87%E5%85%A5%E7%82%B9%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="toc-number">1.4.1.</span> <span class="toc-text">切入点表达式</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A1%A5%E5%85%85"><span class="toc-number">1.5.</span> <span class="toc-text">补充</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#SpringAOP%E3%80%81AspectJ%E3%80%81CGlib%E6%A6%82%E5%BF%B5%E5%AF%B9%E6%AF%94"><span class="toc-number">1.5.1.</span> <span class="toc-text">SpringAOP、AspectJ、CGlib概念对比</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/08/12/Spring-AOP/" title="Spring AOP"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Spring AOP"/></a><div class="content"><a class="title" href="/2022/08/12/Spring-AOP/" title="Spring AOP">Spring AOP</a><time datetime="2022-08-12T13:35:05.000Z" title="发表于 2022-08-12 21:35:05">2022-08-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/08/12/Spring%E7%AE%A1%E7%90%86Bean-%E5%9F%BA%E4%BA%8E%E6%B3%A8%E8%A7%A3%E6%96%B9%E5%BC%8F/" title="Spring管理Bean-基于注解方式"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Spring管理Bean-基于注解方式"/></a><div class="content"><a class="title" href="/2022/08/12/Spring%E7%AE%A1%E7%90%86Bean-%E5%9F%BA%E4%BA%8E%E6%B3%A8%E8%A7%A3%E6%96%B9%E5%BC%8F/" title="Spring管理Bean-基于注解方式">Spring管理Bean-基于注解方式</a><time datetime="2022-08-12T13:30:28.000Z" title="发表于 2022-08-12 21:30:28">2022-08-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/08/12/Git-%E5%BF%AB%E9%80%9F%E4%BD%BF%E7%94%A8/" title="Git 快速使用"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Git 快速使用"/></a><div class="content"><a class="title" href="/2022/08/12/Git-%E5%BF%AB%E9%80%9F%E4%BD%BF%E7%94%A8/" title="Git 快速使用">Git 快速使用</a><time datetime="2022-08-12T06:32:33.000Z" title="发表于 2022-08-12 14:32:33">2022-08-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/08/12/Git-%E5%85%A5%E9%97%A8%E7%9F%A5%E8%AF%86/" title="Git 入门知识"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Git 入门知识"/></a><div class="content"><a class="title" href="/2022/08/12/Git-%E5%85%A5%E9%97%A8%E7%9F%A5%E8%AF%86/" title="Git 入门知识">Git 入门知识</a><time datetime="2022-08-12T02:51:05.000Z" title="发表于 2022-08-12 10:51:05">2022-08-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/08/11/you%E6%84%8F%E6%80%9D%E7%9A%84%E7%BD%91%E7%AB%99%E5%88%97%E8%A1%A8/" title="you意思的网站列表"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="you意思的网站列表"/></a><div class="content"><a class="title" href="/2022/08/11/you%E6%84%8F%E6%80%9D%E7%9A%84%E7%BD%91%E7%AB%99%E5%88%97%E8%A1%A8/" title="you意思的网站列表">you意思的网站列表</a><time datetime="2022-08-11T03:16:43.000Z" title="发表于 2022-08-11 11:16:43">2022-08-11</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By keinenamen</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

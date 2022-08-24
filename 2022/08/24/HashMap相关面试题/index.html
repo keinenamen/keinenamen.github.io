@@ -1,0 +1,213 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>HashMap相关面试题 | 美食家</title><meta name="author" content="keinenamen"><meta name="copyright" content="keinenamen"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="1.HashMap的特点 HashMap是查询效率最高的数据结构，效率为O(1) 默认构造函数是构建一个初始容量为16，负载因子为0.75 的HashMap 可以使用null作为key（只能一个），或者value（可多个）  2.JDK7和JDK8的HashMap有什么区别？ 存储结构不同：JDK1.7是数组+链表，JDK1.8则是数组+链表+红黑树结构; 初始化方式不同：JDK1.7中当哈希表为">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HashMap相关面试题">
+<meta property="og:url" content="http://example.com/2022/08/24/HashMap%E7%9B%B8%E5%85%B3%E9%9D%A2%E8%AF%95%E9%A2%98/index.html">
+<meta property="og:site_name" content="美食家">
+<meta property="og:description" content="1.HashMap的特点 HashMap是查询效率最高的数据结构，效率为O(1) 默认构造函数是构建一个初始容量为16，负载因子为0.75 的HashMap 可以使用null作为key（只能一个），或者value（可多个）  2.JDK7和JDK8的HashMap有什么区别？ 存储结构不同：JDK1.7是数组+链表，JDK1.8则是数组+链表+红黑树结构; 初始化方式不同：JDK1.7中当哈希表为">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
+<meta property="article:published_time" content="2022-08-24T12:11:42.000Z">
+<meta property="article:modified_time" content="2022-08-24T12:28:17.341Z">
+<meta property="article:author" content="keinenamen">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2022/08/24/HashMap%E7%9B%B8%E5%85%B3%E9%9D%A2%E8%AF%95%E9%A2%98/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'HashMap相关面试题',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-08-24 20:28:17'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.2.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">17</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">12</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">17</div></a></div><hr/></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">美食家</a></span><div id="menus"><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">HashMap相关面试题</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-08-24T12:11:42.000Z" title="发表于 2022-08-24 20:11:42">2022-08-24</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-08-24T12:28:17.341Z" title="更新于 2022-08-24 20:28:17">2022-08-24</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Java%E5%9F%BA%E7%A1%80/">Java基础</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Java%E5%9F%BA%E7%A1%80/Java%E9%9B%86%E5%90%88/">Java集合</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="HashMap相关面试题"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h3 id="1-HashMap的特点"><a href="#1-HashMap的特点" class="headerlink" title="1.HashMap的特点"></a>1.HashMap的特点</h3><ul>
+<li>HashMap是查询效率最高的数据结构，效率为O(1)</li>
+<li>默认构造函数是构建一个初始容量为16，负载因子为0.75 的HashMap</li>
+<li>可以使用null作为key（只能一个），或者value（可多个）</li>
+</ul>
+<h3 id="2-JDK7和JDK8的HashMap有什么区别？"><a href="#2-JDK7和JDK8的HashMap有什么区别？" class="headerlink" title="2.JDK7和JDK8的HashMap有什么区别？"></a>2.JDK7和JDK8的HashMap有什么区别？</h3><ul>
+<li>存储结构不同：JDK1.7是数组+链表，JDK1.8则是数组+链表+红黑树结构;</li>
+<li>初始化方式不同：JDK1.7中当哈希表为空时，会先调用inflateTable()初始化一个数组；而JDK1.8则是直接调用resize()扩容;</li>
+<li>插入数据方式不同：插入键值对的put方法的区别，JDK1.8中会将节点插入到链表尾部，而JDK1.7中是采用头插。</li>
+</ul>
+<p><strong>JDK7中的HashMap</strong></p>
+<p>基于<strong>数组+链表</strong>来实现，底层维护一个<strong>Entry数组</strong>，根据计算的hashCode将对应的KV键值对存储到该数组中。发生hashCode冲突，那么就会将该KV键值对放到对应的已有元素的后面， 形成了一个链表式的存储结构。缺点是，Hash冲突严重时，链表的长度会变得很长，查询时间复杂度为O(n)。</p>
+<p><strong>JDK8中的HashMap</strong></p>
+<p>基于<strong>数组+链表+红黑树</strong>来实现的，它的底层维护一个<strong>Node数组</strong>。当链表的存储的数据个数大于等于8时，将链表转为红黑树存储。主要为了优化查询效率，链表为O(N)，而红黑树一直是O(logN)，可以大大的提高查找性能。</p>
+<h3 id="3-介绍一下HashMap底层实现原理-工作原理-？"><a href="#3-介绍一下HashMap底层实现原理-工作原理-？" class="headerlink" title="3.介绍一下HashMap底层实现原理(工作原理)？"></a>3.介绍一下HashMap底层实现原理(工作原理)？</h3><p>HashMap底层是一个数组+ 单向链表实现的，数组中的每一个元素同时还是一个链表的头节点，链表中的每一个节点存储了K-V（Entry对象）值。</p>
+<p>HashMap主要基于hash算法，通过put方法和get方法实现存储和获取对象。</p>
+<p><strong>存储对象时</strong>，将K&#x2F;V传给put方法，该方法调用K的hashCode计算hash从而得到bucket位置，进一步存储，HashMap会根据目前bucket的占用情况自动调整容量(超过Load Facotr则resize为原来的2倍)。</p>
+<p><strong>存储K-V键值对时,首先会调用一个hash方法，来计算出key的hash值，将该值和数组的长度减1并取模可以得到数组中的一个下标位置；接下来我们根据这个下标找到该位置的单向链表，然后把链表的每一个key和要插入的key做一个equals()比较，如果是相等的话，就更新这个key相应的value值；如果不等的话，则把新的键值对放在链表末尾。另外，在put过程中，如果键值对个数超过了数组长度乘以负载因子的时候，会将原数组扩容为原来的两倍（2倍的原因），还有，如果在插入链表的时候，如果链表的长度超过了默认阈值8的时候，会自动将该链表转化为一棵红黑树。</strong></p>
+<p><strong>获取对象时</strong>，将K传给get方法，它调用hashCode计算hash从而得到bucket位置，并进一步调用equals()方法确定键值对。</p>
+<p><strong>get方法和put方法调用方法比较类似，也是先得到key的hash值然后与数组长度取模运算得到一个下标位置，接着去遍历这个下标对应的链表元素，使用equals方法来比较key，如果key相同的话，就把这个元素取出并返回。</strong></p>
+<p>发生hash冲突时，采用链表将元素组织起来，同时链表元素个数大于8时，则用红黑树代替实现。</p>
+<h3 id="4-介绍一下HashMap的扩容机制？"><a href="#4-介绍一下HashMap的扩容机制？" class="headerlink" title="4.介绍一下HashMap的扩容机制？"></a>4.介绍一下HashMap的扩容机制？</h3><ul>
+<li>数组的初始容量为16，每次扩容为之前容量的2倍。（扩容2倍的原因： 使用位运算代替取模运算；提高性能使用足够大的数组）</li>
+<li>当元素个数大于等于 数组容量乘以负载因子时，就进行扩容。</li>
+<li>为了解决碰撞，采用的链表长度达到了8（同时数组长度达到64），则将链表转为红黑树；若链表长度缩小到了6，又会将红黑树转换回单向链表。都是为了提高性能。</li>
+</ul>
+<h3 id="5-HashMap的循环链表时如何产生的？"><a href="#5-HashMap的循环链表时如何产生的？" class="headerlink" title="5.HashMap的循环链表时如何产生的？"></a>5.HashMap的循环链表时如何产生的？</h3><p>在多线程的环境下，如果两个线程同时对HashMap调整大小，存储在链表中的元素的次序会反过来，因为移动到新的bucket位置的时候，HashMap并不会将元素放在链表的尾部，而是放在头部，这是为了避免尾部遍历。如果条件竞争发生了，那么就会产生死循环了。</p>
+<h3 id="6-HashMap为什么线程不安全？"><a href="#6-HashMap为什么线程不安全？" class="headerlink" title="6.HashMap为什么线程不安全？"></a>6.HashMap为什么线程不安全？</h3><p>并发执行put操作时，可能会形成循环链表，从而引起死循环。</p>
+<h3 id="7-HashMap如何实现线程安全？"><a href="#7-HashMap如何实现线程安全？" class="headerlink" title="7.HashMap如何实现线程安全？"></a>7.HashMap如何实现线程安全？</h3><ul>
+<li>直接使用Hashtable类；</li>
+<li>使用ConcurrentHashMap</li>
+<li>使用Collections将HashMap包装成线程安全的Map</li>
+</ul>
+<h3 id="8-HashMap为啥用红黑树而不用B树？"><a href="#8-HashMap为啥用红黑树而不用B树？" class="headerlink" title="8.HashMap为啥用红黑树而不用B树？"></a>8.HashMap为啥用红黑树而不用B树？</h3><p><strong>红黑树是二叉查找树的一种，它的查找相当于一个二分的查找，因此它的时间复杂度是O(logn)，在数据比较多的时候，相比于链表的时间复杂度O(n),查找性能提高了很多。</strong></p>
+<p><strong>之所以一开始不用红黑树，而用链表。是因为在时间和空间性能上的折中。当hash冲突较小时，即使转化为红黑树，在时间效率上的提升不是很大，而且在put的时候效率会变低，因为每次put时要对红黑树进行一些旋转平衡操作，同时需要为每个树节点维护更多的指针，这样有点得不偿失了。</strong></p>
+<p><strong>之所以不用二叉搜索树：在极端环境下会变成一个倾斜的结构，查找效率退化成链表；红黑树是一种平衡树，可以防止这种退化；同时它不像AVL树那样有严格的平衡条件，所以其插入效率相对较高。总之，红黑树可以防止极端情况下的退化，也可以兼顾查询和插入效率。</strong></p>
+<p>B&#x2F;B+树多用于外存上时，B&#x2F;B+是一个磁盘友好的数据结构。</p>
+<p>HashMap本来是数组+链表的形式，链表由于其查找慢的特点，所以需要被<strong>查找效率更高的树</strong>结构来替换。如果用B&#x2F;B+树的话，在数据量不是很多的情况下，数据都会“挤在”一个结点里面，这个时候遍历效率就退化成了链表。</p>
+<h3 id="9-HashMap和HashTable的区别？"><a href="#9-HashMap和HashTable的区别？" class="headerlink" title="9.HashMap和HashTable的区别？"></a>9.HashMap和HashTable的区别？</h3><ul>
+<li>Hashtable是线程安全的，HashMap是线程不安全的实现，所以HashMap比Hashtable的性能高一点。</li>
+<li>Hashtable不允许使用null作为key和value，会引发空指针异常，但HashMap可以使用null作为key或value。</li>
+</ul>
+<h3 id="10-HashMap与ConcurrentHashMap有什么区别？"><a href="#10-HashMap与ConcurrentHashMap有什么区别？" class="headerlink" title="10. HashMap与ConcurrentHashMap有什么区别？"></a>10. HashMap与ConcurrentHashMap有什么区别？</h3><p>HashMap是非线程安全的，在多线程中修改操作时，会产生数据不一致的问题，甚至还会因为并发插入元素而导致链表成环，这样在查找时就会发生死循环，影响到整个应用程序。</p>
+<p>ConcurrentHashMap是线程安全的。它采用了减少锁粒度的方法，尽量减少因为竞争锁而导致的阻塞与冲突，而且ConcurrentHashMap的检索操作是不需要锁的。</p>
+<p><strong>JDK 1.7中的实现：</strong></p>
+<p>jdk 1.7 中，ConcurrentHashMap 是由 <strong>Segment</strong> 数据结构和 <strong>HashEntry</strong> 数组结构构成，采取分段锁来保证安全性。Segment 继承了 ReentrantLock 重入锁，在 ConcurrentHashMap 中扮演锁的角色，HashEntry 则用于存储键值对数据。</p>
+<p>一个 ConcurrentHashMap 里包含一个 Segment 数组，一个 Segment 里包含一个 HashEntry 数组，Segment 的结构和 HashMap 类似，是一个数组和链表结构。</p>
+<p><strong>JDK 1.8中的实现</strong>：</p>
+<p>JDK1.8 的实现摒弃了 Segment 的概念，而是直接用 Node 数组+链表+红黑树的数据结构来实现，并发控制使用 Synchronized 和 CAS 来操作，整个看起来就像是优化过且线程安全的 HashMap，虽然在 JDK1.8 中还能看到 Segment 的数据结构，但是已经简化了属性，只是为了兼容旧版本。</p>
+<h3 id="11-描述Map-put的过程？"><a href="#11-描述Map-put的过程？" class="headerlink" title="11.描述Map put的过程？"></a>11.描述Map put的过程？</h3><p><strong>首次扩容</strong></p>
+<p>先判断数组是否为空，若数组为空则进行第一次扩容（resize）</p>
+<p><strong>计算索引</strong></p>
+<p>通过hash算法，计算键值对在数组中的索引</p>
+<p><strong>插入数据</strong></p>
+<ul>
+<li>如果当前位置元素为空，则直接插入数据；</li>
+<li>如果当前位置元素非空，且key已存在，则直接覆盖其value；</li>
+<li>如果当前位置元素非空，且key不存在，则将数据链到链表末端； </li>
+<li>若链表长度达到8，则将链表转换成红黑树，并将数据插入树中；</li>
+</ul>
+<p><strong>再次扩容</strong></p>
+<p>如果数组中元素个数（size）超过threshold，则再次进行扩容操作。</p>
+<h3 id="12-ConcurrentHashMap的底层原理"><a href="#12-ConcurrentHashMap的底层原理" class="headerlink" title="12.ConcurrentHashMap的底层原理"></a>12.ConcurrentHashMap的底层原理</h3><p>JDK1.7中：</p>
+<p><strong>底层采用数据 + 链表实现，实现了分段锁实现线程安全，它将数组分成了16个段，给每个Segment分配了一把锁，当操作（读）每个Segment的时候，需要先获取对应的锁，因此，它最多有16个线程并发去操作。</strong></p>
+<p>JDK1.8中：</p>
+<p><strong>底层跟HashMap一样，引入了红黑树的数据结构，在并发处理方面，不再采用分段锁的方式，而是使用 CAS和synchronized关键字，进而使得锁的粒度更小（hash桶的级别），这样每次写操作时锁住的是数组中单个链表的头节点，不会影响其他hash桶的写入，从而提高了并发处理能力。</strong></p>
+<h3 id="13-ConcurrentHashMap-在JDK8中为什么用synchronized替换了ReentrantLock"><a href="#13-ConcurrentHashMap-在JDK8中为什么用synchronized替换了ReentrantLock" class="headerlink" title="13.ConcurrentHashMap 在JDK8中为什么用synchronized替换了ReentrantLock"></a>13.ConcurrentHashMap 在JDK8中为什么用synchronized替换了ReentrantLock</h3><p><strong>synchronized相对更好，JDK1.6以后对synchronized关键字做了一些优化，它里面引入了偏向锁，轻量级锁，以及重量级锁。同时随着JDK版本升级在进一步优化。</strong></p>
+<p><strong>而ReentrantLock是通过java代码来实现的，之后的话很难有特别大的提升空间。</strong></p>
+<h3 id="14-synchronized关键字对锁的优化？"><a href="#14-synchronized关键字对锁的优化？" class="headerlink" title="14.synchronized关键字对锁的优化？"></a>14.synchronized关键字对锁的优化？</h3><p><strong>synchronized默认采用的是偏向锁，一般情况下，只有一个线程去获取synchronized的锁。java中对象会记录一个线程id，下次再获取synchronized的锁只需要比较这个线程id就行了。当第二个线程去请求synchronized锁的时候，如果没有发生并发竞争锁，synchronized会自动升级为轻量级锁，第二个线程会尝试自旋锁的方式来获取锁；如果出现两个线程竞争锁的情况的话，synchronized会升级为重量级锁。那么，只会有一个线程能拿到锁，另一个线程会被阻塞。只有等待第一个线程释放掉锁之后，才能去拿到锁。</strong></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://example.com">keinenamen</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2022/08/24/HashMap%E7%9B%B8%E5%85%B3%E9%9D%A2%E8%AF%95%E9%A2%98/">http://example.com/2022/08/24/HashMap%E7%9B%B8%E5%85%B3%E9%9D%A2%E8%AF%95%E9%A2%98/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">美食家</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2022/08/21/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E5%BD%92%E7%BA%B3/"><img class="next-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">排序算法归纳</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">keinenamen</div><div class="author-info__description">个人站点</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">17</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">12</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">17</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-HashMap%E7%9A%84%E7%89%B9%E7%82%B9"><span class="toc-number">1.</span> <span class="toc-text">1.HashMap的特点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-JDK7%E5%92%8CJDK8%E7%9A%84HashMap%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="toc-number">2.</span> <span class="toc-text">2.JDK7和JDK8的HashMap有什么区别？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E4%BB%8B%E7%BB%8D%E4%B8%80%E4%B8%8BHashMap%E5%BA%95%E5%B1%82%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86-%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86-%EF%BC%9F"><span class="toc-number">3.</span> <span class="toc-text">3.介绍一下HashMap底层实现原理(工作原理)？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E4%BB%8B%E7%BB%8D%E4%B8%80%E4%B8%8BHashMap%E7%9A%84%E6%89%A9%E5%AE%B9%E6%9C%BA%E5%88%B6%EF%BC%9F"><span class="toc-number">4.</span> <span class="toc-text">4.介绍一下HashMap的扩容机制？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-HashMap%E7%9A%84%E5%BE%AA%E7%8E%AF%E9%93%BE%E8%A1%A8%E6%97%B6%E5%A6%82%E4%BD%95%E4%BA%A7%E7%94%9F%E7%9A%84%EF%BC%9F"><span class="toc-number">5.</span> <span class="toc-text">5.HashMap的循环链表时如何产生的？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-HashMap%E4%B8%BA%E4%BB%80%E4%B9%88%E7%BA%BF%E7%A8%8B%E4%B8%8D%E5%AE%89%E5%85%A8%EF%BC%9F"><span class="toc-number">6.</span> <span class="toc-text">6.HashMap为什么线程不安全？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-HashMap%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%EF%BC%9F"><span class="toc-number">7.</span> <span class="toc-text">7.HashMap如何实现线程安全？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-HashMap%E4%B8%BA%E5%95%A5%E7%94%A8%E7%BA%A2%E9%BB%91%E6%A0%91%E8%80%8C%E4%B8%8D%E7%94%A8B%E6%A0%91%EF%BC%9F"><span class="toc-number">8.</span> <span class="toc-text">8.HashMap为啥用红黑树而不用B树？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-HashMap%E5%92%8CHashTable%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="toc-number">9.</span> <span class="toc-text">9.HashMap和HashTable的区别？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-HashMap%E4%B8%8EConcurrentHashMap%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="toc-number">10.</span> <span class="toc-text">10. HashMap与ConcurrentHashMap有什么区别？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-%E6%8F%8F%E8%BF%B0Map-put%E7%9A%84%E8%BF%87%E7%A8%8B%EF%BC%9F"><span class="toc-number">11.</span> <span class="toc-text">11.描述Map put的过程？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#12-ConcurrentHashMap%E7%9A%84%E5%BA%95%E5%B1%82%E5%8E%9F%E7%90%86"><span class="toc-number">12.</span> <span class="toc-text">12.ConcurrentHashMap的底层原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#13-ConcurrentHashMap-%E5%9C%A8JDK8%E4%B8%AD%E4%B8%BA%E4%BB%80%E4%B9%88%E7%94%A8synchronized%E6%9B%BF%E6%8D%A2%E4%BA%86ReentrantLock"><span class="toc-number">13.</span> <span class="toc-text">13.ConcurrentHashMap 在JDK8中为什么用synchronized替换了ReentrantLock</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#14-synchronized%E5%85%B3%E9%94%AE%E5%AD%97%E5%AF%B9%E9%94%81%E7%9A%84%E4%BC%98%E5%8C%96%EF%BC%9F"><span class="toc-number">14.</span> <span class="toc-text">14.synchronized关键字对锁的优化？</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/08/24/HashMap%E7%9B%B8%E5%85%B3%E9%9D%A2%E8%AF%95%E9%A2%98/" title="HashMap相关面试题"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="HashMap相关面试题"/></a><div class="content"><a class="title" href="/2022/08/24/HashMap%E7%9B%B8%E5%85%B3%E9%9D%A2%E8%AF%95%E9%A2%98/" title="HashMap相关面试题">HashMap相关面试题</a><time datetime="2022-08-24T12:11:42.000Z" title="发表于 2022-08-24 20:11:42">2022-08-24</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/08/21/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E5%BD%92%E7%BA%B3/" title="排序算法归纳"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="排序算法归纳"/></a><div class="content"><a class="title" href="/2022/08/21/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E5%BD%92%E7%BA%B3/" title="排序算法归纳">排序算法归纳</a><time datetime="2022-08-21T03:05:38.000Z" title="发表于 2022-08-21 11:05:38">2022-08-21</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/08/16/Redis-%E9%9D%A2%E8%AF%95%E9%A2%98/" title="Redis 面试题"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Redis 面试题"/></a><div class="content"><a class="title" href="/2022/08/16/Redis-%E9%9D%A2%E8%AF%95%E9%A2%98/" title="Redis 面试题">Redis 面试题</a><time datetime="2022-08-16T03:09:49.000Z" title="发表于 2022-08-16 11:09:49">2022-08-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/08/16/SpringSecurity-JWT-%E8%AE%A4%E8%AF%81%E4%B8%8E%E9%89%B4%E6%9D%83%E6%B5%81%E7%A8%8B/" title="SpringSecurity + JWT 认证与鉴权流程"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="SpringSecurity + JWT 认证与鉴权流程"/></a><div class="content"><a class="title" href="/2022/08/16/SpringSecurity-JWT-%E8%AE%A4%E8%AF%81%E4%B8%8E%E9%89%B4%E6%9D%83%E6%B5%81%E7%A8%8B/" title="SpringSecurity + JWT 认证与鉴权流程">SpringSecurity + JWT 认证与鉴权流程</a><time datetime="2022-08-15T16:19:05.000Z" title="发表于 2022-08-16 00:19:05">2022-08-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/08/14/%E7%BE%8E%E5%9B%A20814%E7%AC%94%E8%AF%95%E9%A2%98%E8%A7%A3/" title="美团0813笔试题解"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="美团0813笔试题解"/></a><div class="content"><a class="title" href="/2022/08/14/%E7%BE%8E%E5%9B%A20814%E7%AC%94%E8%AF%95%E9%A2%98%E8%A7%A3/" title="美团0813笔试题解">美团0813笔试题解</a><time datetime="2022-08-14T02:07:09.000Z" title="发表于 2022-08-14 10:07:09">2022-08-14</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By keinenamen</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

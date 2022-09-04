@@ -1,0 +1,277 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>Java多线程-常见面试知识点 | 美食家</title><meta name="author" content="keinenamen"><meta name="copyright" content="keinenamen"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Java多线程相关的面试题，后续不断更新！ 1. 创建线程有哪几种方式？创建线程有三种方式，分别是继承Thread类、实现Runnable接口、实现Callable接口。 继承Thread类实现如下：  定义Thread类的子类，并重写该类的run()方法，该run()方法将作为线程执行体。 创建Thread子类的实例，即创建了线程对象。 调用线程对象的start()方法来启动该线程。  实现Ru">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java多线程-常见面试知识点">
+<meta property="og:url" content="http://example.com/2022/09/04/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B-%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9/index.html">
+<meta property="og:site_name" content="美食家">
+<meta property="og:description" content="Java多线程相关的面试题，后续不断更新！ 1. 创建线程有哪几种方式？创建线程有三种方式，分别是继承Thread类、实现Runnable接口、实现Callable接口。 继承Thread类实现如下：  定义Thread类的子类，并重写该类的run()方法，该run()方法将作为线程执行体。 创建Thread子类的实例，即创建了线程对象。 调用线程对象的start()方法来启动该线程。  实现Ru">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
+<meta property="article:published_time" content="2022-09-04T06:26:14.000Z">
+<meta property="article:modified_time" content="2022-09-04T06:29:52.323Z">
+<meta property="article:author" content="keinenamen">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2022/09/04/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B-%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Java多线程-常见面试知识点',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-09-04 14:29:52'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.2.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">29</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">12</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">20</div></a></div><hr/></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">美食家</a></span><div id="menus"><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Java多线程-常见面试知识点</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-09-04T06:26:14.000Z" title="发表于 2022-09-04 14:26:14">2022-09-04</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-09-04T06:29:52.323Z" title="更新于 2022-09-04 14:29:52">2022-09-04</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Java%E5%9F%BA%E7%A1%80/">Java基础</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Java%E5%9F%BA%E7%A1%80/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B/">Java多线程</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Java多线程-常见面试知识点"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>Java多线程相关的面试题，后续不断更新！</p>
+<h5 id="1-创建线程有哪几种方式？"><a href="#1-创建线程有哪几种方式？" class="headerlink" title="1. 创建线程有哪几种方式？"></a>1. 创建线程有哪几种方式？</h5><p>创建线程有三种方式，分别是继承Thread类、实现Runnable接口、实现Callable接口。</p>
+<p><strong>继承Thread类实现如下：</strong></p>
+<ol>
+<li>定义Thread类的子类，并重写该类的run()方法，该run()方法将作为线程执行体。</li>
+<li>创建Thread子类的实例，即创建了线程对象。</li>
+<li>调用线程对象的start()方法来启动该线程。</li>
+</ol>
+<p><strong>实现Runnable接口：</strong></p>
+<ol>
+<li>定义Runnable接口的实现类，并实现该接口的run()方法，该run()方法将作为线程执行体。</li>
+<li>创建Runnable实现类的实例，并将其作为Thread的target来创建Thread对象，Thread对象为线程对象。</li>
+<li>调用线程对象的start()方法来启动该线程。</li>
+</ol>
+<p><strong>实现Callable接口：</strong></p>
+<ol>
+<li>创建Callable接口的实现类，并实现call()方法，该call()方法将作为线程执行体，且该call()方法有返回值。然后再创建Callable实现类的实例。</li>
+<li>使用FutureTask类来包装Callable对象，该FutureTask对象封装了该Callable对象的call()方法的返回值。</li>
+<li>使用FutureTask对象作为Thread对象的target创建并启动新线程。</li>
+<li>调用FutureTask对象的get()方法来获得子线程执行结束后的返回值。</li>
+</ol>
+<p><strong>扩展阅读</strong></p>
+<p><strong>通过继承方式 和 实现接口方式的对比？</strong></p>
+<p>接口方式实现的优缺点：</p>
+<ul>
+<li>线程类只是实现了Runnable接口或Callable接口，还可以继承其他类。</li>
+<li>在这种方式下，多个线程可以共享同一个target对象，所以非常适合多个相同线程来处理同一份资源的情况，从而可以将CPU、代码和数据分开，形成清晰的模型，较好地体现了面向对象的思想。</li>
+<li>劣势是，编程稍稍复杂，如果需要访问当前线程，则必须使用Thread.currentThread()方法。</li>
+</ul>
+<p>继承Thread类实现的优缺点：</p>
+<ul>
+<li>劣势是，因为线程类已经继承了Thread类，所以不能再继承其他父类。</li>
+<li>优势是，编写简单，如果需要访问当前线程，则无须使用Thread.currentThread()方法，直接使用this即可获得当前线程。</li>
+</ul>
+<p>总结：推荐用接口实现！</p>
+<h5 id="2-说说Thread类的常用方法"><a href="#2-说说Thread类的常用方法" class="headerlink" title="2.说说Thread类的常用方法"></a>2.说说Thread类的常用方法</h5><p><strong>常用构造方法：</strong></p>
+<ul>
+<li>Thread()</li>
+<li>Thread(String name)</li>
+<li>Thread(Runnable target)</li>
+<li>Thread(Runnable target, String name)</li>
+</ul>
+<p><em>其中，参数 name为线程名，参数 target为包含线程体的目标对象。</em></p>
+<p><strong>常用静态方法：</strong></p>
+<ul>
+<li><code>currentThread</code>()：返回当前正在执行的线程；</li>
+<li>interrupted()：返回当前执行的线程是否已经被中断；</li>
+<li>sleep(long millis)：使当前执行的线程睡眠多少毫秒数；</li>
+<li>yield()：使当前执行的线程自愿暂时放弃对处理器的使用权并允许其他线程执行；</li>
+</ul>
+<p><strong>常用实例方法：</strong></p>
+<ul>
+<li><code>getId</code>()：返回该线程的id；</li>
+<li><code>getName</code>()：返回该线程的名字；</li>
+<li><code>getPriority</code>()：返回该线程的优先级；</li>
+<li>interrupt()：使该线程中断；</li>
+<li><code>isInterrupted</code>()：返回该线程是否被中断；</li>
+<li><code>isAlive</code>()：返回该线程是否处于活动状态；</li>
+<li><code>isDaemon</code>()：返回该线程是否是守护线程；</li>
+<li><code>setDaemon</code>(<code>boolean</code> on)：将该线程标记为守护线程或用户线程，如果不标记默认是非守护线程；</li>
+<li><code>setName</code>(String name)：设置该线程的名字；</li>
+<li><code>setPriority(int newPriority)</code>：改变该线程的优先级；</li>
+<li>join()：等待该线程终止；</li>
+<li><code>join(long millis)</code>：等待该线程终止,至多等待多少毫秒数。</li>
+</ul>
+<h5 id="3-run-和start-有什么区别？"><a href="#3-run-和start-有什么区别？" class="headerlink" title="3.run()和start()有什么区别？"></a>3.run()和start()有什么区别？</h5><p><strong>run()方法被称为线程执行体，它的方法体代表了线程需要完成的任务，而start()方法用来启动线程。</strong></p>
+<p>调用start()方法启动线程时，系统会把该run()方法当成<strong>线程执行体</strong>来处理。但如果直接调用线程对象的run()方法，则run()方法<strong>立即就会被执行</strong>，而且在run()方法返回之前其他线程无法并发执行。也就是说，如果直接调用线程对象的run()方法，系统把线程对象当成一个普通对象，而run()方法也是一个普通方法，而不是线程执行体。</p>
+<h5 id="4-线程是否可以重复启动，会有什么后果？"><a href="#4-线程是否可以重复启动，会有什么后果？" class="headerlink" title="4. 线程是否可以重复启动，会有什么后果？"></a>4. 线程是否可以重复启动，会有什么后果？</h5><p>只能对处于<strong>新建状态</strong>的线程调用start()方法，否则将引发<code>IllegalThreadStateException</code>异常。</p>
+<p>扩展阅读：</p>
+<p>当程序使用new关键字创建了一个线程之后，该线程就处于新建状态，此时它和其他的Java对象一样，仅仅由Java虚拟机为其分配内存，并初始化其成员变量的值。此时的线程对象没有表现出任何线程的动态特征，程序也不会执行线程的线程执行体。</p>
+<p>当线程对象调用了start()方法之后，该线程处于就绪状态，Java虚拟机会为其创建方法调用栈和程序计数器，处于这个状态中的线程并没有开始运行，只是表示该线程可以运行了。至于该线程何时开始运行，取决于JVM里线程调度器的调度。</p>
+<h5 id="5-介绍一下线程的生命周期"><a href="#5-介绍一下线程的生命周期" class="headerlink" title="5. 介绍一下线程的生命周期"></a>5. 介绍一下线程的生命周期</h5><p>在线程的生命周期中，它要经过新建（New）、就绪（Ready）、运行（Running）、阻塞（Blocked）和死亡（Dead）5种状态。 </p>
+<p>new关键字创建了一个线程之后，该线程就处于<strong>新建状态</strong>。</p>
+<p>当线程对象调用了start()方法之后，该线程处于<strong>就绪状态</strong>，等待调度器调度。</p>
+<p>发生如下情况，线程将会进入<strong>阻塞状态</strong>：</p>
+<ul>
+<li>线程调用sleep()方法主动放弃所占用的处理器资源,需要等待sleep时间结束。</li>
+<li>线程调用了一个阻塞式IO方法，在该方法返回之前，该线程被阻塞。</li>
+<li>线程试图获得一个同步监视器，但该同步监视器正被其他线程所持有。</li>
+<li>线程在等待某个通知（notify）。调用了wait()方法，需要调用notify()唤醒线程。</li>
+<li>其他线程执行了join()方法，当前线程则会阻塞，需要等其他线程执行完。</li>
+<li>程序调用了线程的suspend()方法将该线程挂起。但这个方法容易导致死锁，所以应该尽量避免使用该方法。</li>
+</ul>
+<p>线程会以如下三种方式结束，结束后就处于<strong>死亡状态</strong>：</p>
+<ul>
+<li>run()或call()方法执行完成，线程正常结束。</li>
+<li>线程抛出一个未捕获的Exception或Error。</li>
+<li>直接调用该线程的stop()方法来结束该线程，该方法容易导致死锁，通常不推荐使用。</li>
+</ul>
+<p><strong>扩展阅读</strong><img src="https://banana-keine.oss-cn-chengdu.aliyuncs.com/imgs/202209041429517.png" alt="B6700F052B8C52C28D140E41896513FE"></p>
+<h5 id="6-如何实现线程同步"><a href="#6-如何实现线程同步" class="headerlink" title="6 .如何实现线程同步"></a>6 .如何实现线程同步</h5><ul>
+<li>synchronized关键字修饰</li>
+</ul>
+<p>synchronized关键字修饰方法， 内置锁会保护整个方法。在调用该方法前，需要获得内置锁，否则就处于阻塞状态。需要注意， synchronized关键字也可以修饰静态方法，此时如果调用该静态方法，将会锁住整个类。</p>
+<p>synchronized关键字修饰的语句块，被该关键字修饰的语句块会自动被加上内置锁，从而实现同步。建议使用synchronized代码块同步关键代码即可，不用同步整个方法。</p>
+<ul>
+<li><code>ReentrantLock</code></li>
+</ul>
+<p>Java 5新增了一个<code>java.util.concurrent</code>包来支持同步，其中ReentrantLock类是<strong>可重入、互斥</strong>、实现了Lock接口的锁，它与使用synchronized方法和快具有相同的基本行为和语义，并且扩展了其能力。需要注意的是，ReentrantLock还有一个可以创建公平锁的构造方法，但由于能大幅度降低程序运行效率，因此不推荐使用。</p>
+<ul>
+<li><code>volatile</code></li>
+</ul>
+<p>volatile关键字为域(成员)变量的访问提供了一种免锁机制，使用volatile修饰域相当于告诉虚拟机该域可能会被其他线程更新，因此每次使用该域就要重新计算，而不是使用寄存器中的值。需要注意的是，<strong>volatile不会提供任何原子操作，它也不能用来修饰final类型的变量</strong>。</p>
+<ul>
+<li>原子变量</li>
+</ul>
+<p>在java的<code>util.concurrent.atomic</code>包中提供了创建了原子类型变量的工具类，使用该类可以简化线程同步。例如AtomicInteger 表可以用原子方式更新int的值，可用在应用程序中（如以原子方式增加的计数器），但不能用于替换Integer。可扩展Number，允许那些处理机遇数字类的工具和实用工具进行统一访问。</p>
+<h5 id="7-说一说Java多线程之间的通信方式"><a href="#7-说一说Java多线程之间的通信方式" class="headerlink" title="7. 说一说Java多线程之间的通信方式"></a>7. 说一说Java多线程之间的通信方式</h5><p>Java中线程通信主要有以下三种方式：</p>
+<ol>
+<li><p><code>wait()、notify()、notifyAll()</code></p>
+<p>如果线程之间采用synchronized来保证线程安全，则可以利用wait()、notify()、notifyAll()来实现线程通信。这三个方法都不是Thread类中所声明的方法，而是Object类中声明的方法。原因是每个对象都拥有锁，所以让当前线程等待某个对象的锁，当然应该通过这个对象来操作。并且因为当前线程可能会等待多个线程的锁，如果通过线程来操作，就非常复杂了。另外，这三个方法都是本地方法，并且被final修饰，无法被重写。</p>
+<p>wait()方法可以让当前线程释放对象锁并进入阻塞状态。notify()方法用于唤醒一个正在等待相应对象锁的线程，使其进入就绪队列，以便在当前线程释放锁后竞争锁，进而得到CPU的执行。notifyAll()用于唤醒所有正在等待相应对象锁的线程，使它们进入就绪队列，以便在当前线程释放锁后竞争锁，进而得到CPU的执行。</p>
+<p>每个锁对象都有两个队列，一个是就绪队列，一个是阻塞队列。就绪队列存储了已就绪（将要竞争锁）的线程，阻塞队列存储了被阻塞的线程。当一个阻塞线程被唤醒后，才会进入就绪队列，进而等待CPU的调度。反之，当一个线程被wait后，就会进入阻塞队列，等待被唤醒。</p>
+</li>
+<li><p><code>await()、signal()、signalAll()</code></p>
+<p>如果线程之间采用Lock来保证线程安全，则可以利用await()、signal()、signalAll()来实现线程通信。这三个方法都是Condition接口中的方法，该接口是在Java 1.5中出现的，它用来替代传统的wait+notify实现线程间的协作，它的使用依赖于 Lock。相比使用wait+notify，使用Condition的await+signal这种方式能够更加安全和高效地实现线程间协作。</p>
+<p>Condition依赖于Lock接口，生成一个Condition的基本代码是lock.newCondition() 。 必须要注意的是，Condition 的 await()&#x2F;signal()&#x2F;signalAll() 使用都必须在lock保护之内，也就是说，必须在lock.lock()和lock.unlock之间才可以使用。事实上，await()&#x2F;signal()&#x2F;signalAll() 与 wait()&#x2F;notify()&#x2F;notifyAll()有着天然的对应关系。即：Conditon中的await()对应Object的wait()，Condition中的signal()对应Object的notify()，Condition中的signalAll()对应Object的notifyAll()。</p>
+</li>
+<li><p><code>BlockingQueue</code></p>
+<p>Java 5提供了一个BlockingQueue接口，虽然BlockingQueue也是Queue的子接口，但它的主要用途并不是作为容器，而是作为线程通信的工具。BlockingQueue具有一个特征：当生产者线程试图向BlockingQueue中放入元素时，如果该队列已满，则该线程被阻塞；当消费者线程试图从BlockingQueue中取出元素时，如果该队列已空，则该线程被阻塞。</p>
+<p>程序的两个线程通过交替向BlockingQueue中放入元素、取出元素，即可很好地控制线程的通信。线程之间需要通信，最经典的场景就是生产者与消费者模型，而BlockingQueue就是针对该模型提供的解决方案。</p>
+</li>
+</ol>
+<h5 id="8-说一说Java同步机制中的wait和notify"><a href="#8-说一说Java同步机制中的wait和notify" class="headerlink" title="8. 说一说Java同步机制中的wait和notify"></a>8. 说一说Java同步机制中的wait和notify</h5><p>wait()、notify()、notifyAll()用来实现线程之间的通信，这三个方法都不是Thread类中所声明的方法，而是Object类中声明的方法。原因是每个对象都拥有锁，所以让当前线程等待某个对象的锁，当然应该通过这个对象来操作。并且因为当前线程可能会等待多个线程的锁，如果通过线程来操作，就非常复杂了。另外，这三个方法都是本地方法，并且被final修饰，无法被重写，并且只有采用synchronized实现线程同步时才能使用这三个方法。</p>
+<p>wait()方法可以让当前线程释放对象锁并进入阻塞状态。notify()方法用于唤醒一个正在等待相应对象锁的线程，使其进入就绪队列，以便在当前线程释放锁后竞争锁，进而得到CPU的执行。notifyAll()方法用于唤醒所有正在等待相应对象锁的线程，使它们进入就绪队列，以便在当前线程释放锁后竞争锁，进而得到CPU的执行。</p>
+<p>每个锁对象都有两个队列，一个是就绪队列，一个是阻塞队列。就绪队列存储了已就绪（将要竞争锁）的线程，阻塞队列存储了被阻塞的线程。当一个阻塞线程被唤醒后，才会进入就绪队列，进而等待CPU的调度。反之，当一个线程被wait后，就会进入阻塞队列，等待被唤醒。</p>
+<h5 id="9-说一说sleep-和wait-的区别"><a href="#9-说一说sleep-和wait-的区别" class="headerlink" title="9. 说一说sleep()和wait()的区别"></a>9. 说一说sleep()和wait()的区别</h5><ul>
+<li>sleep()是Thread类中的静态方法，而wait()是Object类中的成员方法；</li>
+<li>sleep()可以在任何地方使用，而wait()只能在同步方法或同步代码块中使用；</li>
+<li>sleep()不会释放锁，而wait()会释放锁，并需要通过<code>notify()/notifyAll()</code>重新获取锁。</li>
+</ul>
+<h5 id="10-说一说notify-、notifyAll-的区别"><a href="#10-说一说notify-、notifyAll-的区别" class="headerlink" title="10. 说一说notify()、notifyAll()的区别"></a>10. 说一说<code>notify()、notifyAll()</code>的区别</h5><p>notify()用于唤醒一个正在等待相应对象锁的线程，使其进入就绪队列，以便在当前线程释放锁后竞争锁，进而得到CPU的执行。</p>
+<p><code>notifyAll()</code>用于唤醒所有正在等待相应对象锁的线程，使它们进入就绪队列，以便在当前线程释放锁后竞争锁，进而得到CPU的执行。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://example.com">keinenamen</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2022/09/04/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B-%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9/">http://example.com/2022/09/04/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B-%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">美食家</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2022/09/04/Java%E9%9B%86%E5%90%88-%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9/"><img class="next-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Java集合-常见面试知识点</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">keinenamen</div><div class="author-info__description">个人站点</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">29</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">12</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">20</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-%E5%88%9B%E5%BB%BA%E7%BA%BF%E7%A8%8B%E6%9C%89%E5%93%AA%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F%EF%BC%9F"><span class="toc-number">1.</span> <span class="toc-text">1. 创建线程有哪几种方式？</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-%E8%AF%B4%E8%AF%B4Thread%E7%B1%BB%E7%9A%84%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95"><span class="toc-number">2.</span> <span class="toc-text">2.说说Thread类的常用方法</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-run-%E5%92%8Cstart-%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="toc-number">3.</span> <span class="toc-text">3.run()和start()有什么区别？</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-%E7%BA%BF%E7%A8%8B%E6%98%AF%E5%90%A6%E5%8F%AF%E4%BB%A5%E9%87%8D%E5%A4%8D%E5%90%AF%E5%8A%A8%EF%BC%8C%E4%BC%9A%E6%9C%89%E4%BB%80%E4%B9%88%E5%90%8E%E6%9E%9C%EF%BC%9F"><span class="toc-number">4.</span> <span class="toc-text">4. 线程是否可以重复启动，会有什么后果？</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5-%E4%BB%8B%E7%BB%8D%E4%B8%80%E4%B8%8B%E7%BA%BF%E7%A8%8B%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="toc-number">5.</span> <span class="toc-text">5. 介绍一下线程的生命周期</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#6-%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E7%BA%BF%E7%A8%8B%E5%90%8C%E6%AD%A5"><span class="toc-number">6.</span> <span class="toc-text">6 .如何实现线程同步</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#7-%E8%AF%B4%E4%B8%80%E8%AF%B4Java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E4%B9%8B%E9%97%B4%E7%9A%84%E9%80%9A%E4%BF%A1%E6%96%B9%E5%BC%8F"><span class="toc-number">7.</span> <span class="toc-text">7. 说一说Java多线程之间的通信方式</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#8-%E8%AF%B4%E4%B8%80%E8%AF%B4Java%E5%90%8C%E6%AD%A5%E6%9C%BA%E5%88%B6%E4%B8%AD%E7%9A%84wait%E5%92%8Cnotify"><span class="toc-number">8.</span> <span class="toc-text">8. 说一说Java同步机制中的wait和notify</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#9-%E8%AF%B4%E4%B8%80%E8%AF%B4sleep-%E5%92%8Cwait-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">9.</span> <span class="toc-text">9. 说一说sleep()和wait()的区别</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#10-%E8%AF%B4%E4%B8%80%E8%AF%B4notify-%E3%80%81notifyAll-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">10.</span> <span class="toc-text">10. 说一说notify()、notifyAll()的区别</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/09/04/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B-%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9/" title="Java多线程-常见面试知识点"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Java多线程-常见面试知识点"/></a><div class="content"><a class="title" href="/2022/09/04/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B-%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9/" title="Java多线程-常见面试知识点">Java多线程-常见面试知识点</a><time datetime="2022-09-04T06:26:14.000Z" title="发表于 2022-09-04 14:26:14">2022-09-04</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/09/04/Java%E9%9B%86%E5%90%88-%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9/" title="Java集合-常见面试知识点"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Java集合-常见面试知识点"/></a><div class="content"><a class="title" href="/2022/09/04/Java%E9%9B%86%E5%90%88-%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9/" title="Java集合-常见面试知识点">Java集合-常见面试知识点</a><time datetime="2022-09-04T05:57:18.000Z" title="发表于 2022-09-04 13:57:18">2022-09-04</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/09/04/Java%E5%9F%BA%E7%A1%80-%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9/" title="Java基础-常见面试知识点"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Java基础-常见面试知识点"/></a><div class="content"><a class="title" href="/2022/09/04/Java%E5%9F%BA%E7%A1%80-%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9/" title="Java基础-常见面试知识点">Java基础-常见面试知识点</a><time datetime="2022-09-04T05:48:23.000Z" title="发表于 2022-09-04 13:48:23">2022-09-04</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/09/02/Leetcode-Hot100%E7%B3%BB%E5%88%97%E5%88%B7%E9%A2%98Day8/" title="Leetcode-Hot100系列刷题Day8"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Leetcode-Hot100系列刷题Day8"/></a><div class="content"><a class="title" href="/2022/09/02/Leetcode-Hot100%E7%B3%BB%E5%88%97%E5%88%B7%E9%A2%98Day8/" title="Leetcode-Hot100系列刷题Day8">Leetcode-Hot100系列刷题Day8</a><time datetime="2022-09-02T13:26:23.000Z" title="发表于 2022-09-02 21:26:23">2022-09-02</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/09/01/Leetcode-Hot100%E7%B3%BB%E5%88%97%E5%88%B7%E9%A2%98Day7/" title="Leetcode-Hot100系列刷题Day7"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Leetcode-Hot100系列刷题Day7"/></a><div class="content"><a class="title" href="/2022/09/01/Leetcode-Hot100%E7%B3%BB%E5%88%97%E5%88%B7%E9%A2%98Day7/" title="Leetcode-Hot100系列刷题Day7">Leetcode-Hot100系列刷题Day7</a><time datetime="2022-09-01T11:04:57.000Z" title="发表于 2022-09-01 19:04:57">2022-09-01</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By keinenamen</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
